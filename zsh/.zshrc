@@ -141,3 +141,5 @@ alias lt='eza --tree --level=2 --long --icons --git'
 alias lta='lt -a'
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+. "$HOME/.cargo/env"
