@@ -111,7 +111,7 @@ source ~/.p10k.zsh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-Alias python=/opt/homebrew/bin/python3.11
+alias python=/opt/homebrew/bin/python3.13
 
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
