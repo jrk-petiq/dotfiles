@@ -143,3 +143,6 @@ source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 . "$HOME/.cargo/env"
+export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
+
+alias nvim-kickstart='NVIM_APPNAME="nvim-kickstart" nvim'
