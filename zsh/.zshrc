@@ -20,14 +20,16 @@ bindkey '^[[A' history-search-backward
 bindkey '^[[B' history-search-forward
 
 alias n="nvim"
-alias dotfiles="cd ~/dotfiles && n ."
+alias dotfiles="cd ~/dotfiles"
 alias ndot="cd ~/dotfiles/nvim && n ."
+alias home="cd ~"
 
 # alias for eza
 alias ls='eza -lh --group-directories-first --icons --hyperlink'
 alias lsa='ls -a'
 alias lt='eza --tree --level=2 --long --icons --git'
 alias lta='lt -a'
+
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
