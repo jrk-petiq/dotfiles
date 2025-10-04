@@ -9,7 +9,7 @@ return {
   {
     "catppuccin",
     opts = {
-      transparent_background = true,
+      transparent_background = false,
     },
   },
   {
