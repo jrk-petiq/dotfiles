@@ -35,5 +35,5 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
 
 eval "$(starship init zsh)"
-eval "$(/Users/john.kowalsky/.local/bin/mise activate zsh)"
 
+eval "$(mise activate zsh)"
