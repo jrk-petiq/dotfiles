@@ -234,10 +234,6 @@ if.app-id = 'com.spotify.client'
 run = "move-node-to-workspace M"
 
 [[on-window-detected]]
-if.app-id = 'com.google.Chrome.app.cinhimbnkkaeohfgghhklpknlkffjgod'
-run = "move-node-to-workspace M"
-
-[[on-window-detected]]
 if.app-id = 'com.apple.finder'
 run = "move-node-to-workspace E"
 
