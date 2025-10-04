@@ -19,6 +19,10 @@ setopt hist_verify
 bindkey '^[[A' history-search-backward
 bindkey '^[[B' history-search-forward
 
+alias n="nvim"
+alias dotfiles="cd ~/dotfiles && n ."
+alias ndot="cd ~/dotfiles/nvim && n ."
+
 # alias for eza
 alias ls='eza -lh --group-directories-first --icons --hyperlink'
 alias lsa='ls -a'
@@ -30,8 +34,6 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 . "$HOME/.cargo/env"
 export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
 
+eval "$(starship init zsh)"
 eval "$(/Users/john.kowalsky/.local/bin/mise activate zsh)"
 
-alias n="nvim"
-alias dotfiles="cd ~/dotfiles && n ."
-alias ndot="cd ~/dotfiles/nvim && n ."
