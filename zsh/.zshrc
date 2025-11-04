@@ -39,3 +39,7 @@ export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
 eval "$(starship init zsh)"
 
 eval "$(mise activate zsh)"
+
+export PATH="$HOME/.local/bin:$PATH"
+
+export NODE_EXTRA_CA_CERTS="$HOME/ZscalerRootCertificate-2048-SHA256.crt"

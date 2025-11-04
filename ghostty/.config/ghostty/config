@@ -6,3 +6,6 @@ window-decoration = true
 # keybind = global:cmd+/=toggle_quick_terminal
 macos-option-as-alt = true
 background-opacity = 0.95
+clipboard-read = allow
+clipboard-write = allow
+copy-on-select = clipboard
