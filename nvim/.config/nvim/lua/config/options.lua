@@ -4,3 +4,5 @@
 vim.opt.relativenumber = false
 
 vim.opt.guicursor = "n-v-c:block-Cursor/lCursor-blinkon1i,i-ci:ver30-iCursor-blinkwait300-blinkon200-blinkoff150"
+
+vim.opt.scrolloff = 10
