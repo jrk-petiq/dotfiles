@@ -1,9 +1,17 @@
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
+fpath=(/opt/homebrew/share/zsh/site-functions $HOME/.zsh $fpath)
+autoload -Uz compinit
+compinit
+
 export NVM_DIR="$HOME/.nvm"
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+if [ -s "/opt/homebrew/opt/nvm/nvm.sh" ]; then
+  . "/opt/homebrew/opt/nvm/nvm.sh"
+fi
+if [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ]; then
+  . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+fi
 
 
 # history setup
@@ -32,6 +40,11 @@ alias lta='lt -a'
 
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+if [ ! -f "$HOME/.zsh/_git" ]; then
+  mkdir -p "$HOME/.zsh"
+  curl -fsSL https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.zsh -o "$HOME/.zsh/_git"
+fi
 
 . "$HOME/.cargo/env"
 export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
