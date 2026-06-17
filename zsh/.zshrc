@@ -58,4 +58,23 @@ eval "$(mise activate zsh)"
 
 export PATH="$HOME/.local/bin:$PATH"
 
-export NODE_EXTRA_CA_CERTS="$HOME/ZscalerRootCertificate-2048-SHA256.crt"
+# export NODE_EXTRA_CA_CERTS="$HOME/ZscalerRootCertificate-2048-SHA256.crt"
+
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# bun completions
+[ -s "$BUN_INSTALL/_bun" ] && source "$BUN_INSTALL/_bun"
+
+# >>> grok installer >>>
+export PATH="$HOME/.grok/bin:$PATH"
+if [ -d "$HOME/.grok/completions/zsh" ]; then
+  fpath=("$HOME/.grok/completions/zsh" $fpath)
+  autoload -Uz compinit && compinit -C
+fi
+# <<< grok installer <<<
+
+# alias for loading env vars
+alias loadenv='set -a && source .env && set +a'
