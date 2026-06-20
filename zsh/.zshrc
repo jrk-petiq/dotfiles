@@ -78,3 +78,8 @@ fi
 
 # alias for loading env vars
 alias loadenv='set -a && source .env && set +a'
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/jrk/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions

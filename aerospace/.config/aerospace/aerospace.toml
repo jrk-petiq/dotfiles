@@ -4,6 +4,7 @@
 
 # It's not necessary to copy all keys to your config.
 # If the key is missing in your config, "default-config.toml" will serve as a fallback
+config-version = 2
 
 # You can use it to add commands that run after login to macOS user session.
 # 'start-at-login' needs to be 'true' for 'after-login-command' to work
@@ -17,6 +18,9 @@ after-startup-command = []
 
 # Start AeroSpace at login
 start-at-login = true
+
+# Keep named workspaces available even when they have no windows.
+persistent-workspaces = ["A", "B", "C", "D", "E", "M", "N", "O", "P", "S", "T", "V", "W", "X"]
 
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
 enable-normalization-flatten-containers = true
@@ -106,7 +110,7 @@ alt-shift-minus = 'resize smart -50'
 alt-shift-equal = 'resize smart +50'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
-alt-1 = 'workspace 1' # for Terminal (new config)
+alt-1 = 'workspace 1'
 alt-2 = 'workspace 2'
 alt-3 = 'workspace 3'
 alt-4 = 'workspace 4'
@@ -115,10 +119,12 @@ alt-6 = 'workspace 6'
 alt-7 = 'workspace 7'
 alt-8 = 'workspace 8'
 alt-9 = 'workspace 9'
+alt-a = 'workspace A' # for Codex
 alt-b = 'workspace B' # for Beekeeper Studio
 alt-c = 'workspace C' # for VS Code
 alt-d = 'workspace D' # for Docker
 alt-e = 'workspace E' # for File Explorer (Finder)
+alt-s = 'workspace S' # for Telegram
 alt-m = 'workspace M' # for Music
 alt-n = 'workspace N' # for Teams
 alt-o = 'workspace O' # for Obsidian
@@ -130,7 +136,7 @@ alt-x = 'workspace X' # for Excel and Numbers
 
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
-alt-shift-1 = 'move-node-to-workspace 1' # for Terminal (new config)
+alt-shift-1 = 'move-node-to-workspace 1'
 alt-shift-2 = 'move-node-to-workspace 2'
 alt-shift-3 = 'move-node-to-workspace 3'
 alt-shift-4 = 'move-node-to-workspace 4'
@@ -139,10 +145,12 @@ alt-shift-6 = 'move-node-to-workspace 6'
 alt-shift-7 = 'move-node-to-workspace 7'
 alt-shift-8 = 'move-node-to-workspace 8'
 alt-shift-9 = 'move-node-to-workspace 9'
+alt-shift-a = 'move-node-to-workspace A' # for Codex
 alt-shift-b = 'move-node-to-workspace B' # for Beekeeper Studio
 alt-shift-c = 'move-node-to-workspace C' # for VS Code
 alt-shift-d = 'move-node-to-workspace D' # for Docker
 alt-shift-e = 'move-node-to-workspace E' # for File Explorer (Finder)
+alt-shift-s = 'move-node-to-workspace S' # for Telegram
 alt-shift-m = 'move-node-to-workspace M' # for Music
 alt-shift-n = 'move-node-to-workspace N' # for Teams
 alt-shift-o = 'move-node-to-workspace O' # for Obsidian
@@ -161,6 +169,7 @@ alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
 alt-shift-semicolon = 'mode service'
+alt-space = 'mode launcher'
 
 alt-shift-r = 'mode resize'
 
@@ -177,6 +186,17 @@ minus = 'resize smart -50'
 equal = 'resize smart +50'
 
 enter = 'mode main'
+esc = 'mode main'
+
+[mode.launcher.binding]
+a = ['exec-and-forget open -b com.openai.codex', 'workspace A', 'mode main']
+c = ['exec-and-forget open -b com.microsoft.VSCode', 'workspace C', 'mode main']
+d = ['exec-and-forget open -b com.docker.docker', 'workspace D', 'mode main']
+s = ['exec-and-forget open -b com.tdesktop.Telegram', 'workspace S', 'mode main']
+o = ['exec-and-forget open -b md.obsidian', 'workspace O', 'mode main']
+t = ['exec-and-forget open -b com.mitchellh.ghostty', 'workspace T', 'mode main']
+w = ['exec-and-forget open -b com.google.Chrome', 'workspace W', 'mode main']
+
 esc = 'mode main'
 
 # 'service' binding mode declaration.
@@ -218,12 +238,16 @@ if.app-id = 'com.microsoft.VSCode'
 run = "move-node-to-workspace C"
 
 [[on-window-detected]]
+if.app-id = 'com.openai.codex'
+run = "move-node-to-workspace A"
+
+[[on-window-detected]]
 if.app-id = 'com.github.wez.wezterm'
-run = "move-node-to-workspace 1"
+run = "move-node-to-workspace T"
 
 [[on-window-detected]]
 if.app-id = 'com.mitchellh.ghostty'
-run = "move-node-to-workspace 1"
+run = "move-node-to-workspace T"
 
 [[on-window-detected]]
 if.app-id = 'com.google.Chrome'
@@ -258,6 +282,10 @@ if.app-id = 'com.apple.Preview'
 run = "move-node-to-workspace P"
 
 [[on-window-detected]]
+if.app-id = 'com.docker.docker'
+run = "move-node-to-workspace D"
+
+[[on-window-detected]]
 if.app-id = 'com.electron.dockerdesktop'
 run = "move-node-to-workspace D"
 
@@ -272,3 +300,7 @@ run = "move-node-to-workspace C"
 [[on-window-detected]]
 if.app-id = 'md.obsidian'
 run = "move-node-to-workspace O"
+
+[[on-window-detected]]
+if.app-id = 'com.tdesktop.Telegram'
+run = "move-node-to-workspace S"

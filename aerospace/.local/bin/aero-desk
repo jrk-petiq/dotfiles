@@ -1,0 +1,103 @@
+#!/usr/bin/env bash
+set -u
+
+AEROSPACE_BIN="${AEROSPACE_BIN:-/opt/homebrew/bin/aerospace}"
+OPEN_BIN="/usr/bin/open"
+OSASCRIPT_BIN="/usr/bin/osascript"
+
+usage() {
+  cat <<'USAGE'
+Usage: aero-desk <preset>
+
+Presets:
+  codex       Open Codex and focus workspace A
+  dev         Open VS Code, Ghostty, Chrome; bring C/T/W to this monitor
+  comms       Open Telegram and Teams; bring G/N to this monitor
+  ops         Open Docker and Beekeeper; bring D/B to this monitor
+  share       Disable AeroSpace tiling for screen sharing
+  normal      Re-enable AeroSpace tiling and reload config
+  list        Print available presets
+USAGE
+}
+
+notify() {
+  local message="$1"
+  "$OSASCRIPT_BIN" -e "display notification \"$message\" with title \"Aero Desk\"" >/dev/null 2>&1 || true
+}
+
+aero() {
+  if [[ -x "$AEROSPACE_BIN" ]]; then
+    "$AEROSPACE_BIN" "$@" >/dev/null 2>&1 || true
+  fi
+}
+
+open_app() {
+  local bundle_id="$1"
+  local app_name="$2"
+
+  "$OPEN_BIN" -b "$bundle_id" >/dev/null 2>&1 || "$OPEN_BIN" -a "$app_name" >/dev/null 2>&1 || true
+}
+
+focus_workspace() {
+  aero workspace "$1"
+}
+
+summon_workspaces() {
+  local workspace
+
+  for workspace in "$@"; do
+    aero summon-workspace "$workspace"
+  done
+}
+
+preset="${1:-}"
+
+case "$preset" in
+  codex)
+    open_app "com.openai.codex" "Codex"
+    sleep 0.7
+    summon_workspaces A
+    focus_workspace A
+    ;;
+  dev)
+    open_app "com.microsoft.VSCode" "Visual Studio Code"
+    open_app "com.mitchellh.ghostty" "Ghostty"
+    open_app "com.google.Chrome" "Google Chrome"
+    sleep 1
+    summon_workspaces C T W
+    focus_workspace C
+    ;;
+  comms)
+    open_app "com.tdesktop.Telegram" "Telegram"
+    open_app "com.microsoft.teams2" "Microsoft Teams"
+    sleep 1
+    summon_workspaces S N
+    focus_workspace S
+    ;;
+  ops)
+    open_app "com.docker.docker" "Docker"
+    open_app "io.beekeeperstudio.desktop" "Beekeeper Studio"
+    sleep 1.5
+    summon_workspaces D B
+    focus_workspace D
+    ;;
+  share)
+    aero enable off
+    notify "AeroSpace tiling disabled for screen sharing"
+    ;;
+  normal)
+    aero enable on
+    aero reload-config
+    notify "AeroSpace tiling enabled"
+    ;;
+  list)
+    printf '%s\n' codex dev comms ops share normal
+    ;;
+  -h|--help|help)
+    usage
+    ;;
+  *)
+    usage
+    exit 2
+    ;;
+esac
